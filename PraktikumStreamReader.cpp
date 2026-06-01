@@ -59,3 +59,15 @@ void readGudang() {
     cout << "======================================\n" << endl;
     file.close();
 }
+
+void createBarang() {
+    ofstream file(NAMA_FILE, ios::app);
+    string namaBarang;
+    cout << "Masukkan nama barang elektronik baru: ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, namaBarang);
+    
+    file << namaBarang << endl;
+    cout << "[SUKSES] Barang berhasil ditambahkan ke gudang!\n";
+    file.close();
+}

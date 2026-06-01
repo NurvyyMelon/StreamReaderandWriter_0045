@@ -109,3 +109,20 @@ void updateBarang() {
         cout << "[GAGAL] Nomor barang tidak valid!\n";
     }
 }
+
+int main() {
+    initFile(); // Pastikan file tersedia agar tidak terjadi error stream
+    int pilihan;
+    TokoElektronik toko;
+
+    do {
+        // Otomatis dipanggil saat menu dibuka sesuai instruksi
+        readGudang(); 
+
+        cout << "=== MENU MANAJEMEN GIBRAN JAYA ===\n";
+        cout << "1. Tambah Data Barang (Create)\n";
+        cout << "2. Ubah Data Barang (Update)\n";
+        cout << "3. Hapus Data Barang (Delete)\n";
+        cout << "4. Simulasi Etalase (Exception Handling test)\n";
+        cout << "0. Keluar Program\n";
+        cout << "Masukkan Pilihan: ";

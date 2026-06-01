@@ -71,3 +71,18 @@ void createBarang() {
     cout << "[SUKSES] Barang berhasil ditambahkan ke gudang!\n";
     file.close();
 }
+
+void updateBarang() {
+    vector<string> dataBarang;
+    ifstream file(NAMA_FILE);
+    string line;
+    
+    while (getline(file, line)) {
+        dataBarang.push_back(line);
+    }
+    file.close();
+
+    if (dataBarang.empty()) {
+        cout << "[GAGAL] Gudang masih kosong, tidak ada yang bisa diubah!\n";
+        return;
+    }

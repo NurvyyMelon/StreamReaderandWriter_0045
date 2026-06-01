@@ -22,3 +22,14 @@ public:
         etalase[1] = "Laptop HP Victus";
         etalase[2] = "Smartphone Poco F7 Pro";
     }
+    string ambilProduk(size_t nomorRak) {
+        try {
+            // Wajib menggunakan fungsi .at() untuk mengakses indeks array
+            return etalase.at(nomorRak);
+        } catch (const out_of_range& e) {
+            // Menangkap error bawaan out_of_range dan melempar (throw) pesan error kustom
+            string pesanError = "Gagal Mengambil Barang : Rak nomor " + to_string(nomorRak) + " kosong atau tidak tersedia!";
+            throw runtime_error(pesanError);
+        }
+    }
+};

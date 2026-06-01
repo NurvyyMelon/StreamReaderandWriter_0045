@@ -52,3 +52,10 @@ void readGudang() {
         cout << no++ << ". " << line << endl;
         isEmpty = false;
     }
+
+    if (isEmpty) {
+        cout << "(Data gudang kosong. Silakan gunakan menu Create.)" << endl;
+    }
+    cout << "======================================\n" << endl;
+    file.close();
+}

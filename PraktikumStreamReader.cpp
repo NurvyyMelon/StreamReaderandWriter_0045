@@ -32,8 +32,9 @@ public:
             throw runtime_error(pesanError);
         }
     }
-    
-    void initFile() {
+};
+
+void initFile() {
     ifstream file(NAMA_FILE);
     if (!file) {
         ofstream newFile(NAMA_FILE);
@@ -107,6 +108,39 @@ void updateBarang() {
         cout << "[SUKSES] Data barang berhasil diperbarui!\n";
     } else {
         cout << "[GAGAL] Nomor barang tidak valid!\n";
+    }
+}
+
+void deleteBarang() {
+    vector<string> dataBarang;
+    ifstream file(NAMA_FILE);
+    string line;
+    
+    while (getline(file, line)) {
+        dataBarang.push_back(line);
+    }
+    file.close();
+
+    if (dataBarang.empty()) {
+        cout << "[GAGAL] Gudang masih kosong, tidak ada yang bisa dihapus!\n";
+        return;
+    }
+
+    int index;
+    cout << "Pilih nomor urut barang yang ingin dihapus: ";
+    cin >> index;
+
+    if (index > 0 && index <= dataBarang.size()) {
+        dataBarang.erase(dataBarang.begin() + (index - 1));
+
+        ofstream outFile(NAMA_FILE);
+        for (const auto& barang : dataBarang) {
+            outFile << barang << endl;
+        }
+        outFile.close();
+        cout << "[SUKSES] Data barang berhasil dihapus dari gudang!\n";
+    } else {
+        cout << "[GAGAL] Nomor urut barang tidak valid!\n";
     }
 }
 

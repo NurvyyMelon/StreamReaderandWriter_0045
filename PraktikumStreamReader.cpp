@@ -32,4 +32,23 @@ public:
             throw runtime_error(pesanError);
         }
     }
-};
+    
+    void initFile() {
+    ifstream file(NAMA_FILE);
+    if (!file) {
+        ofstream newFile(NAMA_FILE);
+        newFile.close();
+    }
+}
+
+void readGudang() {
+    ifstream file(NAMA_FILE);
+    string line;
+    int no = 1;
+    bool isEmpty = true;
+    
+    cout << "\n=== DAFTAR BARANG DI GUDANG (.txt) ===" << endl;
+    while (getline(file, line)) {
+        cout << no++ << ". " << line << endl;
+        isEmpty = false;
+    }

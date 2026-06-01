@@ -86,3 +86,26 @@ void updateBarang() {
         cout << "[GAGAL] Gudang masih kosong, tidak ada yang bisa diubah!\n";
         return;
     }
+
+    int index;
+    cout << "Pilih nomor urut barang yang ingin diubah: ";
+    cin >> index;
+
+    if (index > 0 && index <= dataBarang.size()) {
+        cout << "Masukkan nama barang pengganti: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, line);
+        
+        dataBarang[index - 1] = line;
+
+        // Tulis ulang seluruh isi file (mode default/trunc)
+        ofstream outFile(NAMA_FILE);
+        for (const auto& barang : dataBarang) {
+            outFile << barang << endl;
+        }
+        outFile.close();
+        cout << "[SUKSES] Data barang berhasil diperbarui!\n";
+    } else {
+        cout << "[GAGAL] Nomor barang tidak valid!\n";
+    }
+}

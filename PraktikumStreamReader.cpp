@@ -126,3 +126,58 @@ int main() {
         cout << "4. Simulasi Etalase (Exception Handling test)\n";
         cout << "0. Keluar Program\n";
         cout << "Masukkan Pilihan: ";
+
+        // Pengamanan tipe data input untuk mencegah infinite loop jika dimasukkan huruf
+        if (!(cin >> pilihan)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            pilihan = -1; // Force invalid choice
+        }
+
+        switch (pilihan) {
+            case 1:
+                createBarang();
+                break;
+            case 2:
+                updateBarang();
+                break;
+            case 3:
+                deleteBarang();
+                break;
+            case 4:
+                cout << "\n--- MEMULAI SIMULASI ETALASE ---\n";
+                // Skenario 1: Ambil indeks ke-1 (Harus Sukses)
+                cout << "-> Skenario 1: Mengambil rak indeks ke-1\n";
+                try {
+                    string produk = toko.ambilProduk(1);
+                    cout << "   [BERHASIL] Item yang diambil: " << produk << "\n";
+                } catch (const exception& e) {
+                    cout << "   [ERROR] " << e.what() << "\n";
+                }
+                // Skenario 2: Ambil indeks ke-5 (Harus Gagal dan Menangkap Error Custom)
+                cout << "\n-> Skenario 2: Mengambil rak indeks ke-5\n";
+                try {
+                    string produk = toko.ambilProduk(5);
+                    cout << "   [BERHASIL] Item yang diambil: " << produk << "\n";
+                } catch (const exception& e) {
+                    cout << "   [EXCEPTION CATCHED] " << e.what() << "\n";
+                }
+                cout << "--------------------------------\n";
+                break;
+            case 0:
+                cout << "\nMenutup program. Terima kasih!\n";
+                break;
+            default:
+                cout << "\n[INFO] Pilihan menu tidak valid, silakan coba lagi.\n";
+        }
+        
+        if (pilihan != 0) {
+            cout << "\nTekan [ENTER] untuk kembali ke Menu Utama...";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.get(); 
+        }
+        
+    } while (pilihan != 0);
+
+    return 0;
+}
